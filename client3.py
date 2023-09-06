@@ -54,8 +54,10 @@ if __name__ == "__main__":
         quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
 
         """ ----------- Update to get the ratio --------------- """
+        stkPrices = {}
         for quote in quotes:
             stock, bid_price, ask_price, price = getDataPoint(quote)
+            stkPrices[stock] = price # set the price of the stock in our array to calculate ratio later
             print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
 
-        print("Ratio %s" % getRatio(price, price))
+        print("Ratio %s" % getRatio(stkPrices["ABC"], stkPrices["DEF"])) #calculate price ratio between stocks ABC and DEF
